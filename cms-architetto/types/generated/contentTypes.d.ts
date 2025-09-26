@@ -446,6 +446,42 @@ export interface ApiPietroAlbiniPietroAlbini
   };
 }
 
+export interface ApiProgettiPersonaliProgettiPersonali
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'progetti_personalis';
+  info: {
+    displayName: 'progetti-personali';
+    pluralName: 'progetti-personalis';
+    singularName: 'progetti-personali';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Copertina: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Data: Schema.Attribute.Date;
+    Descrizione: Schema.Attribute.RichText;
+    Immagini: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progetti-personali.progetti-personali'
+    > &
+      Schema.Attribute.Private;
+    Nome: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSlideSlide extends Struct.CollectionTypeSchema {
   collectionName: 'slides';
   info: {
@@ -982,6 +1018,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::pietro-albini.pietro-albini': ApiPietroAlbiniPietroAlbini;
+      'api::progetti-personali.progetti-personali': ApiProgettiPersonaliProgettiPersonali;
       'api::slide.slide': ApiSlideSlide;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
