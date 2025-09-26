@@ -11,15 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(SLIDES_API_URL)
       .then(res => res.json())
       .then(json => {
-        console.log('Risposta Strapi slideshow:', json);
         const slides = json.data;
-        if (!slides || slides.length === 0) {
-          slideshow.innerHTML = '<p>Nessuna immagine disponibile.<br><pre>' + JSON.stringify(json, null, 2) + '</pre></p>';
-          return;
-        }
+        if (!slides || slides.length === 0) return;
         let immaginiTrovate = false;
         slides.forEach((slide, idx) => {
-          console.log('Slide', idx, slide);
           let imgData = slide.immagine;
           if (imgData && imgData.url) {
             immaginiTrovate = true;
@@ -28,27 +23,27 @@ document.addEventListener('DOMContentLoaded', () => {
             img.src = imgUrl;
             img.alt = `Slide ${idx+1}`;
             img.className = 'slide-img';
-            if (idx !== 0) img.style.display = 'none';
+            img.style.opacity = (idx === 0) ? '1' : '0';
+            img.style.zIndex = (idx === 0) ? '2' : '1';
+            img.style.transition = 'opacity 1.2s cubic-bezier(.4,0,.2,1)';
             slideshow.appendChild(img);
           }
         });
-        if (!immaginiTrovate) {
-          slideshow.innerHTML = '<p>Nessuna immagine trovata nei dati.<br><pre>' + JSON.stringify(slides, null, 2) + '</pre></p>';
-          return;
-        }
-        // Semplice slideshow automatico
+        if (!immaginiTrovate) return;
+        // Slideshow automatico con fade
         let current = 0;
         const images = slideshow.querySelectorAll('.slide-img');
         if (images.length > 1) {
           setInterval(() => {
-            images[current].style.display = 'none';
+            images[current].style.opacity = '0';
+            images[current].style.zIndex = '1';
             current = (current + 1) % images.length;
-            images[current].style.display = 'block';
-          }, 3000);
+            images[current].style.opacity = '1';
+            images[current].style.zIndex = '2';
+          }, 3500);
         }
       })
       .catch(err => {
-        slideshow.innerHTML = '<p>Errore nel caricamento delle immagini.<br>' + err + '</p>';
         console.error('Errore slideshow:', err);
       });
   }
@@ -71,19 +66,22 @@ document.addEventListener('DOMContentLoaded', () => {
         nav.classList.remove('open');
       });
     });
-  }
+  } 
 
   // ===============================
   // TIMELINE PROGETTI DAL CMS (solo se presente #timeline)
   // ===============================
   const timeline = document.getElementById("timeline");
   if (timeline) {
-  const API_URL = 'http://localhost:1337/api/pietro-albinis?populate=*';
+    // Scegli l'endpoint in base alla pagina
+    let API_URL = 'http://localhost:1337/api/pietro-albinis?populate=*';
+    if (window.location.pathname.includes('personali.html')) {
+      API_URL = 'http://localhost:1337/api/progetti-personalis?populate=*';
+    }
     fetch(API_URL)
       .then(res => res.json())
       .then(json => {
         const projectsData = json.data;
-        console.log('projectsData:', projectsData);
         if (!projectsData || projectsData.length === 0) {
           timeline.innerHTML = '<p>Nessun progetto disponibile.</p>';
           return;
@@ -92,54 +90,51 @@ document.addEventListener('DOMContentLoaded', () => {
           .slice()
           .sort((a, b) => new Date(b.Data) - new Date(a.Data))
           .forEach(proj => {
-          if (!proj || !proj.Nome) return;
-          // Descrizione: mostra solo se stringa, oppure estrai testo da possibili strutture rich text
-          console.log('Descrizione:', proj.Descrizione);
-          let descrizione = '';
-          if (typeof proj.Descrizione === 'string') {
-            descrizione = proj.Descrizione;
-          } else if (proj.Descrizione && Array.isArray(proj.Descrizione)) {
-            // Concatena tutti i testi dei children di tutti i paragrafi
-            descrizione = proj.Descrizione.map(par =>
-              Array.isArray(par.children)
-                ? par.children.map(child => child.text || '').join('')
-                : ''
-            ).join('<br>');
-          } else if (proj.Descrizione && Array.isArray(proj.Descrizione.blocks) && proj.Descrizione.blocks.length > 0) {
-            // Caso: oggetto con blocks
-            descrizione = proj.Descrizione.blocks.map(par =>
-              Array.isArray(par.children)
-                ? par.children.map(child => child.text || '').join('')
-                : ''
-            ).join('<br>');
-          }
-          // Data: mostra solo se presente, formattata (dd/mm/yyyy)
-          let data = '';
-          if (proj.Data) {
-            const d = proj.Data.split('T')[0];
-            const [year, month, day] = d.split('-');
-            data = `${day}/${month}/${year}`;
-          }
-          // Copertina: mostra solo se url presente
-          let imgUrl = '';
-          if (proj.Copertina && proj.Copertina.url) {
-            imgUrl = proj.Copertina.url;
-          }
-          const item = document.createElement("div");
-          item.className = "timeline-item";
-          item.innerHTML = `
-            <div class="timeline-left" style="max-width: 350px; word-break: break-word; z-index: 2; background: #fff; position: relative;">
-              <h3>${proj.Nome}</h3>
-              <div class="timeline-label">${data}</div>
-              <div class="timeline-side-text">${descrizione}</div>
-            </div>
-            <div class="timeline-center"></div>
-            <div class="timeline-content">
-              ${imgUrl ? `<img src="http://localhost:1337${imgUrl}" alt="Copertina progetto" class="timeline-image">` : ''}
-            </div>
-          `;
-          timeline.appendChild(item);
-        });
+            if (!proj || !proj.Nome) return;
+            // Descrizione: mostra solo se stringa, oppure estrai testo da possibili strutture rich text
+            let descrizione = '';
+            if (typeof proj.Descrizione === 'string') {
+              descrizione = proj.Descrizione;
+            } else if (proj.Descrizione && Array.isArray(proj.Descrizione)) {
+              descrizione = proj.Descrizione.map(par =>
+                Array.isArray(par.children)
+                  ? par.children.map(child => child.text || '').join('')
+                  : ''
+              ).join('<br>');
+            } else if (proj.Descrizione && Array.isArray(proj.Descrizione.blocks) && proj.Descrizione.blocks.length > 0) {
+              descrizione = proj.Descrizione.blocks.map(par =>
+                Array.isArray(par.children)
+                  ? par.children.map(child => child.text || '').join('')
+                  : ''
+              ).join('<br>');
+            }
+            // Data: mostra solo se presente, formattata (dd/mm/yyyy)
+            let data = '';
+            if (proj.Data) {
+              const d = proj.Data.split('T')[0];
+              const [year, month, day] = d.split('-');
+              data = `${day}/${month}/${year}`;
+            }
+            // Copertina: mostra solo se url presente
+            let imgUrl = '';
+            if (proj.Copertina && proj.Copertina.url) {
+              imgUrl = proj.Copertina.url;
+            }
+            const item = document.createElement("div");
+            item.className = "timeline-item";
+            item.innerHTML = `
+              <div class="timeline-left" style="max-width: 350px; word-break: break-word; z-index: 2; background: #fff; position: relative;">
+                <h3>${proj.Nome}</h3>
+                <div class="timeline-label">${data}</div>
+                <div class="timeline-side-text">${descrizione}</div>
+              </div>
+              <div class="timeline-center"></div>
+              <div class="timeline-content">
+                ${imgUrl ? `<img src="http://localhost:1337${imgUrl}" alt="Copertina progetto" class="timeline-image">` : ''}
+              </div>
+            `;
+            timeline.appendChild(item);
+          });
       })
       .catch(err => {
         timeline.innerHTML = '<p>Errore nel caricamento dei progetti.</p>';

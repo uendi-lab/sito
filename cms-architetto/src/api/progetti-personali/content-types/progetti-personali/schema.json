@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "progetti_personalis",
+  "info": {
+    "singularName": "progetti-personali",
+    "pluralName": "progetti-personalis",
+    "displayName": "progetti-personali"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nome": {
+      "type": "string"
+    },
+    "Descrizione": {
+      "type": "richtext"
+    },
+    "Data": {
+      "type": "date"
+    },
+    "Copertina": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Immagini": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
