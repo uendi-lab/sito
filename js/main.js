@@ -2,6 +2,18 @@
 // MENU HAMBURGER
 // ===============================
 document.addEventListener('DOMContentLoaded', () => {
+  // Calcola dinamicamente l'offset per il header fisso e lo applica alla variabile CSS
+  const setHeaderOffset = () => {
+    const headerEl = document.querySelector('header');
+    if (!headerEl) return;
+    const h = headerEl.offsetHeight;
+    document.documentElement.style.setProperty('--header-offset', `${h}px`);
+  };
+  // Chiama subito e di nuovo su load/resize (font o immagini possono cambiare l'altezza)
+  setHeaderOffset();
+  window.addEventListener('resize', () => setHeaderOffset());
+  window.addEventListener('load', () => setHeaderOffset());
+
   // ===============================
   // SLIDESHOW HOMEPAGE DA STRAPI
   // ===============================
@@ -120,17 +132,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (proj.Copertina && proj.Copertina.url) {
               imgUrl = proj.Copertina.url;
             }
+            // ID progetto per link (dinamico da Strapi)
+            const projectId = proj.documentId; // usa documentId, non id
+            console.log('Document ID usato per link:', projectId, proj.Nome);
             const item = document.createElement("div");
             item.className = "timeline-item";
             item.innerHTML = `
               <div class="timeline-left" style="max-width: 350px; word-break: break-word; z-index: 2; background: #fff; position: relative;">
-                <h3>${proj.Nome}</h3>
+                <h3><a href="progetto.html?id=${projectId}" class="timeline-title-link">${proj.Nome}</a></h3>
                 <div class="timeline-label">${data}</div>
                 <div class="timeline-side-text">${descrizione}</div>
               </div>
               <div class="timeline-center"></div>
               <div class="timeline-content">
-                ${imgUrl ? `<img src="http://localhost:1337${imgUrl}" alt="Copertina progetto" class="timeline-image">` : ''}
+                ${imgUrl ? `<a href="progetto.html?id=${projectId}"><img src="http://localhost:1337${imgUrl}" alt="Copertina progetto" class="timeline-image"></a>` : ''}
               </div>
             `;
             timeline.appendChild(item);
@@ -165,6 +180,78 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealTimeline);
     revealTimeline(); // iniziale
   };
+  // avvia animazione timeline (se presente)
+  initTimelineAnimation();
+
+  // ===============================
+  // SLIDESHOW COPERTINE PROGETTI (per .project-image)
+  // ===============================
+  const projectImageContainer = document.querySelector('.project-image');
+  if (projectImageContainer) {
+    // usa lo stesso endpoint dei progetti usato per la timeline
+    let API_URL_PROJECTS = 'http://localhost:1337/api/pietro-albinis?populate=*';
+    if (window.location.pathname.includes('personali.html')) {
+      API_URL_PROJECTS = 'http://localhost:1337/api/progetti-personalis?populate=*';
+    }
+
+    fetch(API_URL_PROJECTS)
+      .then(res => res.json())
+      .then(json => {
+        const projects = json.data || [];
+        const images = [];
+        projects.forEach(proj => {
+          if (proj && proj.Copertina && proj.Copertina.url) {
+            const url = proj.Copertina.url.startsWith('http') ? proj.Copertina.url : `http://localhost:1337${proj.Copertina.url}`;
+            images.push(url);
+          }
+        });
+
+        if (images.length === 0) {
+          // nessuna immagine dal CMS: non fare nulla (rimane sfondo statico)
+          return;
+        }
+
+        // crea immagini e inseriscile nel container
+        images.forEach((src, idx) => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `Copertina progetto ${idx+1}`;
+          img.className = 'project-slide';
+          img.style.opacity = (idx === 0) ? '1' : '0';
+          img.style.zIndex = (idx === 0) ? '2' : '1';
+          img.style.transition = 'opacity 1s ease';
+          projectImageContainer.appendChild(img);
+        });
+
+        // slideshow automatico
+        let current = 0;
+        const imgs = projectImageContainer.querySelectorAll('.project-slide');
+        if (imgs.length > 1) {
+          setInterval(() => {
+            imgs[current].style.opacity = '0';
+            imgs[current].style.zIndex = '1';
+            current = (current + 1) % imgs.length;
+            imgs[current].style.opacity = '1';
+            imgs[current].style.zIndex = '2';
+          }, 3500);
+        }
+      })
+      .catch(err => {
+        console.error('Errore nel recupero delle copertine dei progetti:', err);
+      });
+  }
+
+  // Aggiungi classe .scrolled all'header quando si scrolla per mostrare ombra/sfondo
+  const headerEl = document.querySelector('header');
+  if (headerEl) {
+    const onScroll = () => {
+      if (window.scrollY > 10) headerEl.classList.add('scrolled');
+      else headerEl.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // chiamata iniziale
+    onScroll();
+  }
 });
 
 
