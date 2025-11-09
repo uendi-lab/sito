@@ -2,80 +2,95 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Studio Albini</title>
-  <link rel="stylesheet" href="prova.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chi siamo - Studio Albini</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<link rel="stylesheet" href="css/style.css">
-
 <body>
 
-    <div class="intro">
-    <div class="intro-content">
-    <h1>PROGETTARE LO SPAZIO VALORIZZARE LA VITA</h1>
-    <p>
-      Ci occupiamo di architettura, ristrutturazione e trasformazione degli spazi abitativi,
-      con un approccio sartoriale e contemporaneo. Ogni progetto nasce dall’ascolto delle
-      persone e dei luoghi, per dare forma a soluzioni che uniscono estetica, funzionalità
-      e comfort.<br/><br/>
-      Crediamo che l’architettura debba migliorare la qualità della vita quotidiana,
-      rispondendo in modo sensibile al contesto e alle esigenze di chi lo abita. Dalla
-      ristrutturazione di interni alla progettazione completa di ambienti residenziali,
-      il nostro lavoro è guidato dalla cura del dettaglio, dalla sostenibilità e da una
-      visione chiara dello spazio come esperienza.
-    </p>
-  </div>
-  </div>
- 
+  <header>
+    <a href="homepage.html" aria-label="Torna alla homepage"><img src="img/logo.jpg" alt="Logo Studio Albini" class="logo" /></a>
+    <div class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
 
-  <!-- Progetti Section -->
-  <section class="projects">
-    <div class="projects-content">
-      <img src="img/railway-station-1029215_1280.jpg" alt="Progetto architettonico"/>
-      <div class="project-text">
+    <nav>
+      <div class="close-btn">&#10005;</div>
+  <a href="chi-siamo.html">Chi siamo</a>
+  <a href="progetti2.html">Realizzazioni</a>
+  <a href="personali.html">Personali</a>
+    </nav>
+  </header>
+
+  <main>
+  <section class="hero hero--light">
+      <div class="hero-content">
+        <h1>PROGETTARE LO SPAZIO, VALORIZZARE LA VITA</h1>
         <p>
-          Ogni progetto rappresenta un dialogo tra estetica, funzionalità e identità.
-          In questa sezione è possibile esplorare una selezione di interventi che spaziano
-          dalla progettazione ex novo alla ristrutturazione di spazi esistenti, con particolare
-          attenzione all'abitare contemporaneo. Ogni lavoro è pensato su misura, con l'obiettivo
-          di valorizzare le caratteristiche del luogo, rispondere alle esigenze dei committenti
-          e creare ambienti armoniosi, accoglienti e duraturi.<br/><br/>
-          Dal recupero di interni alla ridefinizione di spazi domestici moderni, ogni progetto
-          racconta una visione architettonica attenta ai dettagli, alla sostenibilità e alla
-          qualità dell'esperienza abitativa.
+          Ci occupiamo di architettura, ristrutturazione e trasformazione degli spazi abitativi,
+          con un approccio sartoriale e contemporaneo. Ogni progetto nasce dall’ascolto delle
+          persone e dei luoghi, per dare forma a soluzioni che uniscono estetica, funzionalità
+          e comfort.
         </p>
-        <button onclick="window.location.href='progetti.html'">Scopri</button>
+        <p>
+          Crediamo che l’architettura debba migliorare la qualità della vita quotidiana,
+          rispondendo in modo sensibile al contesto e alle esigenze di chi lo abita. Dalla
+          ristrutturazione di interni alla progettazione completa di ambienti residenziali,
+          il nostro lavoro è guidato dalla cura del dettaglio, dalla sostenibilità e da una
+          visione dello spazio come esperienza.
+        </p>
       </div>
-    </div>
-  </section>
-  
+    </section>
 
-  <!-- Contatti Section -->
-  <section class="contacts">
-    <div class="contact-left">
-      <div class="contact-box">
-      <img src="img/logo.jpg" alt="Logo Studio Albini" class="contact-logo" /> 
-      <div class="contact-info">
-      <h2>PIETRO ALBINI</h2>
-      <p>Architetto Professionista</p>
+    <!-- Progetti Section (featured) -->
+    <section class="projects">
+      <div class="projects-content projects-feature">
+        <div class="project-image" style="background-image: url('img/railway-station-1029215_1280.jpg');" role="img" aria-label="Progetto architettonico"></div>
+        <div class="project-text">
+          <h2>Realizzazioni selezionate</h2>
+          <p>
+            Ogni progetto rappresenta un dialogo tra estetica, funzionalità e identità.
+            Qui trovi una selezione di interventi che spaziano dalla progettazione ex novo
+            alla ristrutturazione di spazi esistenti, pensati per valorizzare il contesto
+            e migliorare la qualità dell'abitare.
+          </p>
+          <a class="btn btn-primary" href="progetti2.html">Scopri le realizzazioni</a>
+        </div>
       </div>
+    </section>
+
+    <!-- Contatti Section -->
+    <section class="contacts">
+      <div class="contact-left">
+        <div class="contact-box">
+          <img src="img/logo.jpg" alt="Logo Studio Albini" class="contact-logo" />
+          <div class="contact-info">
+            <h2>PIETRO ALBINI</h2>
+            <p>Architetto Professionista</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="contact-right">
-      <div class="contact-detail">
-      <p>📞 +39 123 456 7890</p>
-      <p>✉️ studioalbini@example.com</p>
-      <p>📍 Via Architettura 12, Milano</p>
-      <p>
-        🔗 <a href="#">Instagram</a> | <a href="#">LinkedIn</a>
-      </p>
-    </div>
-    </div>
-  </section>
+      <div class="contact-right">
+        <div class="contact-detail">
+          <p>📞 +39 3331016322</p>
+          <p>✉️ info@pietroalbini.it</p>
+          <p>📍 Via Papa Giovanni XXIII 24, Ello (LC)</p>
+          <!--<p>
+            🔗 <a href="#">Instagram</a>
+          </p>-->
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Studio Albini - Tutti i diritti riservati</p>
   </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

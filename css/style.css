@@ -1,9 +1,6 @@
 /* ===============================
    SLIDESHOW HOMEPAGE
 ================================ */
-/* ===============================
-   SLIDESHOW SFONDO PAGINA INTERA
-================================ */
 .slideshow-bg {
   position: fixed;
   inset: 0;
@@ -27,6 +24,7 @@
 .slideshow-bg .slide-img[style*="display: none"] {
   opacity: 0;
 }
+
 /* ===============================
    RESET & BASE
 ================================ */
@@ -45,6 +43,15 @@ body {
   line-height: 1.6;
 }
 
+/* spazio di offset per header fisso, evita sovrapposizione dei contenuti quando si scorre */
+:root {
+  --header-offset: 110px; /* regola se il tuo header è più piccolo/grande */
+}
+
+main {
+  padding-top: var(--header-offset);
+}
+
 /* ===============================
    IMMAGINI
 ================================ */
@@ -55,19 +62,34 @@ img {
 }
 
 /* ===============================
-   HEADER / NAVBAR
+  HEADER / NAVBAR
 ================================ */
-header {
-  width: 100%;
-  background-color: transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  overflow-x: hidden;
+
+/* Homepage: make header match the darker hero/slideshow tone so the page feels uniform.
+  We target only the homepage by using the `body.homepage` class. Links and logo
+  inside the header are forced to a light color for contrast. */
+body.homepage header {
+  background-color: rgba(0,0,0,0.40);
+  color: #fff;
+}
+
+body.homepage header.scrolled {
+  /* slightly stronger when scrolled */
+  background-color: rgba(0,0,0,0.42);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.18);
+}
+
+/* Ensure header links on homepage are visible against the dark tone */
+body.homepage header a,
+body.homepage header .nav a,
+body.homepage header .logo {
+  color: #fff !important;
+}
+
+/* If the header contains an img logo that is dark, allow using a light variant by
+   adding `.logo img.logo--light` in markup; fallback: reduce opacity to blend. */
+body.homepage header .logo img {
+  opacity: 0.95;
 }
 
 .logo {
@@ -132,7 +154,9 @@ nav a:hover {
    HERO
 ================================ */
 .hero {
-  height: 100vh;
+  /* Non usare height:100vh (causa sovrapposizione con header fisso).
+     Usa min-height in base all'altezza della viewport meno l'header. */
+  min-height: calc(100vh - var(--header-offset));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,6 +172,30 @@ nav a:hover {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
+}
+
+/* Homepage: overlay/dimming stronger so slideshow appears darker */
+/* homepage-specific overrides removed to restore original homepage tone */
+
+/* ===============================
+   HERO LIGHT THEME (per chi-siamo)
+   sfondo chiaro statico con pattern sottile
+================================ */
+.hero--light {
+  background-color: #fbfaf8; /* tonalità chiara e calda */
+  /* leggero pattern a righe diagonali molto sottile */
+  background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0 1px, transparent 1px 24px);
+  color: #222; /* testo scuro per tema chiaro */
+}
+
+.hero--light::after {
+  /* rimuovi sovrapposizione scura; mantieni un lieve velamento bianco se necessario */
+  background: rgba(255,255,255,0.0);
+}
+
+.hero--light .hero-content {
+  color: #222;
+  text-shadow: none;
 }
 
 .hero-content {
@@ -209,19 +257,100 @@ section {
 }
 
 /* ===============================
+   PROJECTS (featured small section)
+================================ */
+.projects-feature {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-image {
+  flex: 1 1 50%;
+  min-height: 320px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+/* slideshow images inside project-image */
+.project-image {
+  position: relative; /* needed for absolute images */
+}
+
+.project-image img.project-slide {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.projects .project-text {
+  flex: 1 1 45%;
+  padding: 1rem 0.5rem;
+}
+
+.projects .project-text h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+  color: #111;
+}
+
+.projects .project-text p {
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+/* Primary button */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #111;
+  color: #fff;
+  padding: 0.9rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* ===============================
    TIMELINE
 ================================ */
 .timeline-section {
   background-color: #fff;
   color: #000;
   padding: 0 5vw;       /* da 2rem a 5vw = più dinamico e largo */
-  padding-top: 120px;
+  padding-top: 0px;
 }
 
 .timeline-title {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 3rem;
+}
+
+.timeline-title-link {
+  color: black;
 }
 
 .timeline-container {
@@ -361,20 +490,28 @@ section {
 /* ===============================
    FOOTER
 ================================ */
-footer {
-  position: relative;
-  color: #fff;
-  text-align: center;
-  padding: 5px;
+header {
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: sticky; /* mantiene l'header in-flow ma resta visibile in cima */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  overflow-x: hidden;
 }
 
-footer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 0;
+/* quando la pagina è scrollata aggiungiamo un'ombra per separare visivamente */
+header.scrolled {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  background-color: rgba(255,255,255,0.98);
+  backdrop-filter: blur(3px);
 }
+
 
 /* ===============================
    RESPONSIVE
@@ -383,6 +520,11 @@ footer::before {
   .logo {
     height: 60px;
     width: 60px;
+  }
+
+  /* header più compatto su mobile */
+  :root {
+    --header-offset: 80px;
   }
 
   .hero h1 {
@@ -396,6 +538,19 @@ footer::before {
 
   .projects-grid {
     grid-template-columns: 1fr;
+  }
+
+  .projects-feature {
+    flex-direction: column;
+  }
+
+  .project-image {
+    min-height: 200px;
+    width: 100%;
+  }
+
+  .projects .project-text {
+    padding: 0.5rem 0;
   }
 
   .hamburger {
@@ -485,3 +640,103 @@ footer::before {
     font-size: 0.9rem;
   }
 }
+
+/* ===============================
+   DETTAGLIO PROGETTO
+================================ */
+.project-detail-main {
+  margin-top: 0px; /* spazio sotto la navbar */
+  background-color: #fafafa;
+  padding: 4rem 2rem;
+  padding-top: 0px;
+}
+
+.project-detail {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.project-detail h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.project-date {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 2rem;
+}
+
+/* ✅ Copertina più piccola e centrata */
+.project-cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.project-cover-img {
+  width: 60%; /* più piccola e centrata */
+  max-width: 600px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ✅ Descrizione centrata */
+.project-description {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+  text-align: justify;
+}
+
+.project-detail h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+/* Griglia immagini del progetto */
+.project-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ✅ Tutte le immagini stessa dimensione */
+.project-img {
+  width: 100%;
+  height: 250px; /* fissa */
+  object-fit: cover; /* riempie il box */
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.project-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .project-detail h1 {
+    font-size: 2rem;
+  }
+  .project-cover-img {
+    width: 85%;
+  }
+  .project-img {
+    height: 200px;
+  }
+}
+
