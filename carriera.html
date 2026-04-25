@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carriera - Studio Albini</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/carriera-timeline.css">
+</head>
+
+<body>
+
+<header>
+  <a href="homepage.html">
+    <img src="img/logo.jpg" alt="Logo Studio Albini" class="logo" />
+  </a>
+
+  <nav>
+    <div class="close-btn" onclick="toggleMenu()">&#10005;</div>
+    <a href="chi-siamo.html" onclick="toggleMenu()">Profilo</a>
+    <a href="progetti2.html" onclick="toggleMenu()">Collaborazioni</a>
+    <a href="personali.html" onclick="toggleMenu()">I miei progetti</a>
+    <a href="design.html" onclick="toggleMenu()">Design</a>
+    <a href="carriera.html" onclick="toggleMenu()">Carriera</a>
+  </nav>
+
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
+
+<main class="carriera-main">
+
+  <div class="carriera-columns-title">
+    <h1>Progetti Personali</h1>
+    <h1>Collaborazioni</h1>
+  </div>
+
+  <div id="timeline-wrapper">
+    <div id="timeline-left" class="timeline-column"></div>
+    <div id="timeline-right" class="timeline-column"></div>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 Studio Albini - Tutti i diritti riservati</p>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/carriera.js"></script>
+
+</body>
+</html>

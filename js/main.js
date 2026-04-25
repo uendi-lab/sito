@@ -1,6 +1,14 @@
 // ===============================
 // MENU HAMBURGER
 // ===============================
+
+// helper function used by onclick attributes in HTML
+function toggleMenu() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  nav.classList.toggle('open');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Calcola dinamicamente l'offset per il header fisso e lo applica alla variabile CSS
   const setHeaderOffset = () => {
@@ -19,15 +27,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===============================
   const slideshow = document.getElementById('slideshow');
   if (slideshow) {
+    console.log('Slideshow container found');
     const SLIDES_API_URL = 'http://localhost:1337/api/slides?populate=*';
     fetch(SLIDES_API_URL)
       .then(res => res.json())
       .then(json => {
+        console.log('Slideshow response', json);
         const slides = json.data;
-        if (!slides || slides.length === 0) return;
+        console.log('numero slide:', slides?.length);
+        slides.forEach((slide, idx) => {
+          console.log('slide', idx, slide);
+          console.log('keys', Object.keys(slide));
+        });
+        if (!slides || slides.length === 0) {
+          console.warn('Nessuna slide restituita dal server');
+          slideshow.textContent = 'Nessuna slide da mostrare';
+          return;
+        }
         let immaginiTrovate = false;
         slides.forEach((slide, idx) => {
-          let imgData = slide.immagine;
+          // inspect possible image field names
+          let imgData = slide.immagine || slide.image || slide.img || slide.url || null;
+          console.log('imgData for slide', idx, imgData);
           if (imgData && imgData.url) {
             immaginiTrovate = true;
             const imgUrl = imgData.url.startsWith('http') ? imgData.url : `http://localhost:1337${imgData.url}`;
@@ -41,7 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
             slideshow.appendChild(img);
           }
         });
-        if (!immaginiTrovate) return;
+        if (!immaginiTrovate) {
+          console.warn('Slides presenti ma senza URL');
+          slideshow.textContent = 'Slides esistono ma nessuna immagine';
+          return;
+        }
         // Slideshow automatico con fade
         let current = 0;
         const images = slideshow.querySelectorAll('.slide-img');
@@ -57,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(err => {
         console.error('Errore slideshow:', err);
+        // fallback placeholder if slide load fails
+        slideshow.innerHTML = '<div class="slide-placeholder">Nessuna immagine disponibile</div>';
       });
   }
   const hamburger = document.querySelector('.hamburger');

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chi siamo - Studio Albini</title>
+  <title>Profilo - Studio Albini</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -18,10 +18,12 @@
     </div>
 
     <nav>
-      <div class="close-btn">&#10005;</div>
-  <a href="chi-siamo.html">Chi siamo</a>
-  <a href="progetti2.html">Realizzazioni</a>
-  <a href="personali.html">Personali</a>
+      <div class="close-btn" onclick="toggleMenu()">&#10005;</div> <!-- X per chiudere -->
+      <a href="chi-siamo.html" onclick="toggleMenu()">Profilo</a>
+		  <a href="progetti2.html" onclick="toggleMenu()">Collaborazioni</a>
+		  <a href="personali.html" onclick="toggleMenu()">I miei progetti</a>
+      <a href="design.html" onclick="toggleMenu()">Design</a>
+		  <a href="carriera.html" onclick="toggleMenu()">Carriera</a>
     </nav>
   </header>
 
