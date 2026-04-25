@@ -1,19 +1,20 @@
 /* ===============================
-   SLIDESHOW HOMEPAGE
+   SLIDESHOW (used in homepage hero)
 ================================ */
+/* the container fills its parent; parent must be positioned relative */
 .slideshow-bg {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
 }
 .slideshow-bg .slide-img {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   left: 0;
   top: 0;
@@ -23,6 +24,148 @@
 }
 .slideshow-bg .slide-img[style*="display: none"] {
   opacity: 0;
+}
+
+/* homepage specific hero layout */
+
+body.homepage .hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--header-offset));
+  background: #fff;
+}
+body.homepage .hero-left {
+  flex: 1.2 1 0%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  background: none;
+  min-width: 0;
+  min-height: 0;
+  padding-left: 4vw;
+  padding-right: 2vw;
+}
+body.homepage .slideshow-bg {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  max-width: 1500px;
+  max-height: 80vh;
+  min-height: 500px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 40px rgba(0,0,0,0.15);
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+body.homepage .slideshow-bg .slide-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  transition: opacity 0.7s;
+  filter: brightness(0.97) contrast(1.08);
+}
+body.homepage .slideshow-bg .slide-img[style*="display: none"] {
+  opacity: 0;
+}
+body.homepage .hero-right {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: #fff;
+  padding: 0 5vw;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  color: #111;
+}
+body.homepage .hero-right h1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #111;
+  line-height: 1.1;
+}
+body.homepage .hero-right p {
+  font-size: 1.25rem;
+  color: #222;
+  margin-bottom: 0;
+}
+
+@media (max-width: 1100px) {
+  body.homepage .hero {
+    flex-direction: column;
+    height: auto;
+  }
+  body.homepage .hero-left, body.homepage .hero-right {
+    padding: 2vw 4vw;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  body.homepage .hero-right {
+    align-items: center;
+    text-align: center;
+  }
+  body.homepage .slideshow-bg {
+    width: 100%;
+    max-width: 100vw;
+    min-height: 180px;
+  }
+  body.homepage .hero-right h1 {
+    font-size: 2.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body.homepage .hero {
+    flex-direction: column;
+  }
+  body.homepage .hero-left,
+  body.homepage .hero-right {
+    flex: unset;
+    width: 100%;
+  }
+  body.homepage .hero-right {
+    padding: 1.5rem;
+    text-align: center;
+  }
+}
+
+/* make header background lighter now that slideshow is not full-screen */
+body.homepage header {
+  background-color: #fff;
+  color: #000;
+  position: relative;
+  z-index: 20; /* sit on top of hero content */
+}
+body.homepage header.scrolled {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+body.homepage header a,
+body.homepage header .nav a,
+body.homepage header .logo {
+  color: #000 !important;
+}
+
+/* override the homepage dark link rules earlier */
+.homepage-header nav a {
+  color: #000 !important;
+}
+.homepage-header nav a:hover {
+  color: #333;
 }
 
 /* ===============================
@@ -38,8 +181,14 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  color: #333;
+  color: #111;
   background-color: #fff;
+  line-height: 1.6;
+}
+html, body {
+  font-family: 'Montserrat', sans-serif;
+  color: #111;
+  background: #fff !important;
   line-height: 1.6;
 }
 
@@ -69,7 +218,7 @@ img {
   We target only the homepage by using the `body.homepage` class. Links and logo
   inside the header are forced to a light color for contrast. */
 body.homepage header {
-  background-color: rgba(0,0,0,0.40);
+  background-color: #fff;
   color: #fff;
 }
 
@@ -80,11 +229,11 @@ body.homepage header.scrolled {
 }
 
 /* Ensure header links on homepage are visible against the dark tone */
-body.homepage header a,
+/*body.homepage header a,
 body.homepage header .nav a,
 body.homepage header .logo {
   color: #fff !important;
-}
+}*/
 
 /* If the header contains an img logo that is dark, allow using a light variant by
    adding `.logo img.logo--light` in markup; fallback: reduce opacity to blend. */
@@ -167,12 +316,12 @@ nav a:hover {
   background-position: center;
 }
 
-.hero::after {
+/*.hero::after {
   content: '';
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
-}
+}*/
 
 /* Homepage: overlay/dimming stronger so slideshow appears darker */
 /* homepage-specific overrides removed to restore original homepage tone */
@@ -457,7 +606,7 @@ section {
 }
 
 .contact-box {
-  background-color: rgba(255,255,255,0.3);
+  background: #fff !important;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -512,6 +661,148 @@ header.scrolled {
   backdrop-filter: blur(3px);
 }
 
+/* ===============================
+   TIMELINES CARRIERA
+================================ */
+.carriera-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:120px;
+  margin-bottom:80px;
+}
+
+.carriera-columns-title{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:120px;
+  text-align:center;
+  margin-bottom:80px;
+}
+
+/* Layout principale */
+.carriera-main {
+    padding: 80px 40px;
+}
+
+.carriera-columns {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+}
+
+.carriera-col {
+    flex: 1;
+    max-width: 700px;
+    position: relative;
+}
+
+.carriera-col::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:2px;
+  height:100%;
+  background:#333;
+  transform:translateX(-50%);
+}
+
+#timeline-wrapper{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:120px;
+  position:relative;
+}
+
+/* Titolo */
+.timeline-title-carriera {
+    font-size: 32px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+/* Container timeline */
+.timeline-container-carriera {
+    position: relative;
+}
+
+/* Linea verticale */
+.timeline-container-carriera::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: #333;
+    transform: translateX(-50%);
+}
+
+/* Item timeline */
+.timeline-item-carriera {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 80px;
+    z-index: 1;
+}
+
+/* Pallino */
+.timeline-item-carriera::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: black;
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+}
+
+/* Contenuto */
+.timeline-content-carriera {
+    padding-right: 40px;
+    text-align: right;
+}
+
+/* Testo a sinistra */
+.timeline-label-carriera {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.timeline-side-text-carriera {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.timeline-description {
+    font-style: italic;
+    color: #777;
+}
+
+/* Immagine */
+.timeline-image-carriera {
+    width: 260px;
+    border-radius: 12px;
+    justify-self: start;
+    margin-left: 40px;
+}
+
+
+
+
+
+.timeline-side-text{
+    font-weight: bold;
+}
+
+.timeline-description{
+    color: #777;
+    font-style: italic;
+}
 
 /* ===============================
    RESPONSIVE
@@ -635,10 +926,40 @@ header.scrolled {
   .timeline-label {
     font-size: 1rem;
   }
-
+/*TIMELINE CARRIERA*/
   .timeline-side-text {
     font-size: 0.9rem;
   }
+
+      .carriera-columns {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .timeline-container-carriera::before {
+        left: 20px;
+    }
+
+    .timeline-item-carriera {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 40px;
+    }
+
+    .timeline-item-carriera::before {
+        left: 20px;
+    }
+
+    .timeline-content-carriera {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .timeline-image-carriera {
+        margin: 20px 0;
+        width: 100%;
+        max-width: 350px;
+    }
 }
 
 /* ===============================
