@@ -664,6 +664,12 @@ header.scrolled {
 /* ===============================
    TIMELINES CARRIERA
 ================================ */
+table {
+  width: 100%; 
+  border-collapse: collapse; 
+  table-layout: fixed;
+}
+
 .carriera-row{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -681,7 +687,9 @@ header.scrolled {
 
 /* Layout principale */
 .carriera-main {
-    padding: 80px 40px;
+  padding-top: 0px;  
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .carriera-columns {

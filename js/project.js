@@ -4,12 +4,18 @@ function getQueryParam(param) {
   return urlParams.get(param);
 }
 
+
 const projectId = getQueryParam('id');
+const tipo = getQueryParam('tipo');
 
 if (projectId) {
   console.log('Project ID:', projectId);
-  
-  fetch(`http://localhost:1337/api/pietro-albinis/${projectId}?populate=*`)
+  // Scegli endpoint in base al tipo
+  let endpoint = `http://localhost:1337/api/pietro-albinis/${projectId}?populate=*`;
+  if (tipo === 'personale') {
+    endpoint = `http://localhost:1337/api/progetti-personalis/${projectId}?populate=*`;
+  }
+  fetch(endpoint)
     .then(res => res.json())
     .then(data => {
       console.log('Risposta completa:', data);

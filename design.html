@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Progetti - Studio Albini</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<header>
+  <a href="homepage.html" aria-label="Torna alla homepage"><img src="img/logo.jpg" alt="Logo Studio Albini" class="logo" /></a>
+  <nav>
+      <div class="close-btn" onclick="toggleMenu()">&#10005;</div> <!-- X per chiudere -->
+      <a href="chi-siamo.html" onclick="toggleMenu()">Profilo</a>
+		  <a href="progetti2.html" onclick="toggleMenu()">Collaborazioni</a>
+		  <a href="personali.html" onclick="toggleMenu()">I miei progetti</a>
+      <a href="design.html" onclick="toggleMenu()">Design</a>
+		  <a href="carriera.html" onclick="toggleMenu()">Carriera</a>
+    </nav>
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
+
+  <section class="timeline-section">
+    <h1 class="timeline-title">I Nostri Progetti</h1>
+    <div id="timeline" class="timeline-container"></div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Studio Albini - Tutti i diritti riservati</p>
+  </footer>
+
+<script src="js/main.js"></script>
+<script src="js/project.js"></script>
+</body> 
+</html>

@@ -14,19 +14,20 @@ async function loadCarriera() {
   personali.sort((a,b)=>new Date(b.Data)-new Date(a.Data));
   collaborazioni.sort((a,b)=>new Date(b.Data)-new Date(a.Data));
 
+
   personali.forEach(p => {
-    leftCol.innerHTML += createItem(p, 'left');
+    leftCol.innerHTML += createItem(p, 'left', true);
   });
 
   collaborazioni.forEach(c => {
-    rightCol.innerHTML += createItem(c, 'right');
+    rightCol.innerHTML += createItem(c, 'right', false);
   });
 
   // 👉 CALCOLA LINEA DOPO IL RENDER
   setTimeout(adjustTimelineLines, 50);
 }
 
-function createItem(proj, side){
+function createItem(proj, side, isPersonale){
 
   let imgUrl = '';
   if (proj.Copertina?.url) {
@@ -52,27 +53,33 @@ function createItem(proj, side){
     ).join('<br>');
   }
 
+  // Costruisci link al dettaglio progetto
+  const projectId = proj.documentId;
+  const projectLink = isPersonale
+    ? `progetto.html?id=${projectId}&tipo=personale`
+    : `progetto.html?id=${projectId}`;
+
   return `
     <div class="timeline-item ${side}">
       <div class="timeline-dot"></div>
 
       ${side === 'left' ? `
         <div class="timeline-text left-text">
-          <h3>${proj.Nome}</h3>
+          <h3><a href="${projectLink}" class="timeline-title-link">${proj.Nome}</a></h3>
           <div class="date">${data}</div>
           <div class="desc">${descrizione}</div>
         </div>
 
         <div class="timeline-image">
-          ${imgUrl ? `<img src="${imgUrl}" />` : ""}
+          ${imgUrl ? `<a href="${projectLink}"><img src="${imgUrl}" /></a>` : ""}
         </div>
       ` : `
         <div class="timeline-image">
-          ${imgUrl ? `<img src="${imgUrl}" />` : ""}
+          ${imgUrl ? `<a href="${projectLink}"><img src="${imgUrl}" /></a>` : ""}
         </div>
 
         <div class="timeline-text right-text">
-          <h3>${proj.Nome}</h3>
+          <h3><a href="${projectLink}" class="timeline-title-link">${proj.Nome}</a></h3>
           <div class="date">${data}</div>
           <div class="desc">${descrizione}</div>
         </div>
