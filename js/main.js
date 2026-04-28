@@ -117,6 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('personali.html')) {
       API_URL = 'http://localhost:1337/api/progetti-personalis?populate=*';
     }
+    if (window.location.pathname.includes('design.html')) {
+      API_URL = 'http://localhost:1337/api/progetti-personalis?populate=*';
+    }
     fetch(API_URL)
       .then(res => res.json())
       .then(json => {
@@ -162,17 +165,22 @@ document.addEventListener('DOMContentLoaded', () => {
             // ID progetto per link (dinamico da Strapi)
             const projectId = proj.documentId; // usa documentId, non id
             console.log('Document ID usato per link:', projectId, proj.Nome);
+            // Determina se siamo su personali.html
+            const isPersonali = window.location.pathname.includes('design.html');
+            const projectLink = isPersonali
+              ? `progetto.html?id=${projectId}&tipo=personale`
+              : `progetto.html?id=${projectId}`;
             const item = document.createElement("div");
             item.className = "timeline-item";
             item.innerHTML = `
               <div class="timeline-left" style="max-width: 350px; word-break: break-word; z-index: 2; background: #fff; position: relative;">
-                <h3><a href="progetto.html?id=${projectId}" class="timeline-title-link">${proj.Nome}</a></h3>
+                <h3><a href="${projectLink}" class="timeline-title-link">${proj.Nome}</a></h3>
                 <div class="timeline-label">${data}</div>
                 <div class="timeline-side-text">${descrizione}</div>
               </div>
               <div class="timeline-center"></div>
               <div class="timeline-content">
-                ${imgUrl ? `<a href="progetto.html?id=${projectId}"><img src="http://localhost:1337${imgUrl}" alt="Copertina progetto" class="timeline-image"></a>` : ''}
+                ${imgUrl ? `<a href="${projectLink}"><img src="http://localhost:1337${imgUrl}" alt="Copertina progetto" class="timeline-image"></a>` : ''}
               </div>
             `;
             timeline.appendChild(item);
