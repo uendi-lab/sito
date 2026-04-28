@@ -9,7 +9,6 @@
 
 </head>
 <body class="homepage">
-  <div id="slideshow" class="slideshow-bg"></div>
   <header class="homepage-header">
     <a href="homepage.html" aria-label="Torna alla homepage"><img src="img/logo.jpg" alt="Logo Studio Albini" class="logo" /></a>
     <div class="hamburger" onclick="toggleMenu()">
@@ -20,18 +19,24 @@
 
     <nav>
       <div class="close-btn" onclick="toggleMenu()">&#10005;</div> <!-- X per chiudere -->
-      <a href="chi-siamo.html" onclick="toggleMenu()">Chi siamo</a>
-      <a href="progetti2.html" onclick="toggleMenu()">Realizzazioni</a>
-      <a href="personali.html" onclick="toggleMenu()">Personali</a>
+      <a href="chi-siamo.html" onclick="toggleMenu()">Profilo</a>
+      <a href="progetti2.html" onclick="toggleMenu()">Collaborazioni</a>
+      <a href="personali.html" onclick="toggleMenu()">I miei progetti</a>
+      <a href="personali.html">Design</a> <!-- AGGIUNGERE PAGINA DESIGN -->
+      <a href="carriera.html" onclick="toggleMenu()">Carriera</a>
+      <!-- NAVBAR FISSA ANCHE IN HOMEPAGE -->
+      <!-- RICHIEDI UNA CONSULENZA -->
     </nav>
   </header>
 
+  <!-- hero section with split layout -->
   <div class="hero">
-    <div class="hero-content">
+    <div class="hero-left">
+      <div id="slideshow" class="slideshow-bg"></div>
+    </div>
+    <div class="hero-right">
       <h1>Pietro Albini Geometra</h1>
       <p>Design contemporaneo, materiali naturali, spazi che parlano.</p>
-      </div>
-      <div id="slideshow" class="slideshow-bg"></div>
     </div>
   </div>
 
