@@ -25,6 +25,55 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===============================
   // SLIDESHOW HOMEPAGE DA STRAPI
   // ===============================
+    // ===============================
+    // FORM CONTATTI (chi-siamo.html)
+    // ===============================
+  const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formMessage = document.getElementById('formMessage');
+    formMessage.textContent = '';
+
+    const payload = {
+      nome: document.getElementById('nome').value,
+      email: document.getElementById('email').value,
+      oggetto: document.getElementById('oggetto').value,
+      messaggio: document.getElementById('messaggio').value
+    };
+
+    try {
+      const response = await fetch('http://localhost:1337/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: payload
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        formMessage.style.color = 'green';
+        formMessage.textContent = 'Messaggio inviato con successo!';
+        contactForm.reset();
+      } else {
+        formMessage.style.color = 'red';
+        formMessage.textContent =
+          result.error?.message || 'Errore durante invio';
+      }
+    } catch (error) {
+      formMessage.style.color = 'red';
+      formMessage.textContent = 'Errore di rete';
+      console.error(error);
+    }
+  });
+}
+
   const slideshow = document.getElementById('slideshow');
   if (slideshow) {
     console.log('Slideshow container found');
@@ -288,5 +337,3 @@ document.addEventListener('DOMContentLoaded', () => {
     onScroll();
   }
 });
-
-
