@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <header>
+  <header class="homepage-header">
     <a href="homepage.html" aria-label="Torna alla homepage"><img src="img/logo.jpg" alt="Logo Studio Albini" class="logo" /></a>
     <div class="hamburger">
       <div></div>
@@ -19,15 +19,16 @@
 
     <nav>
       <div class="close-btn" onclick="toggleMenu()">&#10005;</div> <!-- X per chiudere -->
-		  <a href="progetti2.html" onclick="toggleMenu()">Collaborazioni</a>
-		  <a href="personali.html" onclick="toggleMenu()">I miei progetti</a>
+		  <a href="homepage.html" onclick="toggleMenu()">Home</a>
+      <a href="progetti2.html" onclick="toggleMenu()">Collaborazioni</a>
+		  <!--<a href="personali.html" onclick="toggleMenu()">I miei progetti</a>-->
       <a href="design.html" onclick="toggleMenu()">Design</a>
 		  <a href="carriera.html" onclick="toggleMenu()">Carriera</a>
-      <a href="chi-siamo.html" onclick="toggleMenu()">Contatti</a>
+      <a href="chi-siamo.html" onclick="toggleMenu()">Richiedi una consulenza</a>
     </nav>
   </header>
 
-  <main>
+  <main style="padding: 0;">
   <!--<section class="hero hero--light">
        <div class="hero-content">
         <h1>PROGETTARE LO SPAZIO, VALORIZZARE LA VITA</h1>
@@ -48,7 +49,7 @@
     </section>-->
 
     <!-- Progetti Section (featured) -->
-    <section class="projects">
+    <!-- <section class="projects">
       <div class="projects-content projects-feature">
         <div class="project-image" style="background-image: url('img/railway-station-1029215_1280.jpg');" role="img" aria-label="Progetto architettonico"></div>
         <div class="project-text">
@@ -62,53 +63,70 @@
           <a class="btn btn-primary" href="progetti2.html">Scopri le realizzazioni</a>
         </div>
       </div>
-    </section>
+    </section>-->
 
-    <!-- Contatti Section -->
-    <section class="contacts">
-      <div class="contact-left">
-        <div class="contact-box">
-          <img src="img/logo.jpg" alt="Logo Studio Albini" class="contact-logo" />
-          <div class="contact-info">
-            <h2>PIETRO ALBINI</h2>
-            <p>Architetto Professionista</p>
-          </div>
-        </div>
-      </div>
-      <div class="contact-right">
-        <div class="contact-detail">
+
+<!-- Contatti Section -->
+<section class="contacts">
+  <!-- Colonna sinistra -->
+  <div class="contact-left">
+    <div class="contact-box">
+      <img src="img/logo.jpg" alt="Logo Studio Albini" class="contact-logo" />
+
+      <div class="contact-info">
+        <h2>PIETRO ALBINI</h2>
+        <p>Architetto Professionista</p>
+
+        <div class="contact-data">
           <p>📞 +39 3331016322</p>
           <p>✉️ info@pietroalbini.it</p>
           <p>📍 Via Papa Giovanni XXIII 24, Ello (LC)</p>
-          <!--<p>
-            🔗 <a href="#">Instagram</a>
-          </p>-->
-          </div>
-          <div class="contact-form-box">
-            <h3>Scrivici un messaggio</h3>
-            <form id="contactForm">
-              <label for="nome">Nome:</label><br>
-              <input type="text" id="nome" name="nome" required><br>
-              <label for="email">Email:</label><br>
-              <input type="email" id="email" name="email" required><br>
-              <label for="oggetto">Oggetto:</label><br>
-              <input type="text" id="oggetto" name="oggetto" required><br>
-              <label for="messaggio">Messaggio:</label><br>
-              <textarea id="messaggio" name="messaggio" required></textarea><br>
-              <button type="submit">Invia</button>
-              <div id="formMessage" style="margin-top:10px;"></div>
-            </form>
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <!-- Colonna destra -->
+  <div class="contact-right">
+    <div class="contact-detail">
+      <div class="contact-form-box">
+        <h3>Richiedi una consulenza</h3>
+
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="oggetto">Oggetto</label>
+            <input type="text" id="oggetto" name="oggetto" required class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="messaggio">Messaggio</label>
+            <textarea id="messaggio" name="messaggio" required class="form-input"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Invia</button>
+          <div id="formMessage" style="margin-top:10px;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
   </main>
 
   <!-- Footer -->
-  <footer>
+  <!--<footer>
     <p>&copy; 2025 Studio Albini - Tutti i diritti riservati</p>
   </footer>
-
+-->
   <script src="js/main.js"></script>
 </body>
 </body>

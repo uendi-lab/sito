@@ -1,3 +1,64 @@
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.contact-form-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* ===============================
+   FORM CONTATTI UNIFORMATO
+================================ */
+.contact-form {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;   /* prima 1.2rem */
+  align-items: center;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;   /* prima 0.4rem */
+  width: 100%;
+}
+.form-input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  padding: 0.45rem 0.8rem;   /* prima 0.6rem 0.9rem */
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  color: #222;
+  width: 100%;
+}
+.form-input:focus {
+  border-color: #111;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.contact-form label {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.1rem;
+}
+.contact-form textarea.form-input {
+  min-height: 75px;   /* prima 110px */
+  resize: vertical;
+}
+.contact-form .btn-primary {
+  margin-top: 0.2rem;
+  padding: 0.7rem 1rem;   /* bottone più compatto */
+  font-size: 0.95rem;
+}
 /* ===============================
    SLIDESHOW (used in homepage hero)
 ================================ */
@@ -157,15 +218,15 @@ body.homepage header.scrolled {
 body.homepage header a,
 body.homepage header .nav a,
 body.homepage header .logo {
-  color: #000 !important;
+  color: #000000 !important;
 }
 
 /* override the homepage dark link rules earlier */
 .homepage-header nav a {
-  color: #000 !important;
+  color: #000000 !important;
 }
 .homepage-header nav a:hover {
-  color: #333;
+  color: #000000;
 }
 
 /* ===============================
@@ -219,7 +280,7 @@ img {
   inside the header are forced to a light color for contrast. */
 body.homepage header {
   background-color: #fff;
-  color: #fff;
+  color: #000000;
 }
 
 body.homepage header.scrolled {
@@ -264,10 +325,10 @@ nav a:hover {
 
 /* Navbar bianca solo in homepage */
 .homepage-header nav a {
-  color: #fff !important;
+  color: #000000 !important;
 }
 .homepage-header nav a:hover {
-  color: #fff;
+  color: #000000;
 }
 
 /* ===============================
@@ -594,47 +655,60 @@ section {
 ================================ */
 .contacts {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  padding: 4rem 2rem;
-  border-top: 1px solid #000;
+  align-items: center;
+  gap: 4rem;
+  min-height: 80vh;
+  padding: 2rem 2rem;
+  /*border-top: 1px solid #000;*/
 }
 
-.contact-left, .contact-right {
-  flex: 1 1 300px;
-  margin-bottom: 2rem;
+.contact-left,
+.contact-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contact-box {
-  background: #fff !important;
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
-  border-radius: 10px;
+  gap: 2rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 
 .contact-logo {
-  width: 100px;
+  width: 120px;
   height: auto;
   object-fit: contain;
 }
 
 .contact-info h2 {
-  font-size: 1.4rem;
-  margin: 0;
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
 }
 
 .contact-info p {
-  font-size: 1.1rem;
-  margin: 5px 0 0 0;
+  margin-bottom: 0.4rem;
 }
 
 .contact-detail {
-  background-color: rgba(255,255,255,0.3);
-  max-width: 500px;
-  padding: 20px;
+  width: 100%;
+  max-width: 450px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  background: #fff;
 }
+
+.contact-data {
+  margin-top: 1rem;
+}
+
 
 /* ===============================
    FOOTER
@@ -968,6 +1042,16 @@ table {
         width: 100%;
         max-width: 350px;
     }
+
+      .contacts {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-box {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 /* ===============================
