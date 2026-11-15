@@ -3,8 +3,7 @@
 // ===============================
 // In locale: 'http://localhost:1337'
 // In produzione: 'https://strapi-pietro-albini.onrender.com'
-const STRAPI_URL = 'http://localhost:1337';
-
+const STRAPI_URL = 'https://strapi-pietro-albini.onrender.com';
 // ===============================
 // MENU HAMBURGER
 // ===============================
