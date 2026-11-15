@@ -25,8 +25,17 @@ async function loadCarriera() {
     rightCol.innerHTML += createItem(c, 'right', false);
   });
 
-  // 👉 CALCOLA LINEA DOPO IL RENDER
+  // 👉 Calcola linea dopo il render iniziale
   setTimeout(adjustTimelineLines, 50);
+  setTimeout(adjustTimelineLines, 300);
+
+  // Ricalcola con precisione ogni volta che un'immagine termina il caricamento
+  const allImages = document.querySelectorAll('.timeline-column img');
+  allImages.forEach(img => {
+    if (!img.complete) {
+      img.addEventListener('load', adjustTimelineLines);
+    }
+  });
 }
 
 function createItem(proj, side, isPersonale){
