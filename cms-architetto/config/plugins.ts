@@ -3,11 +3,12 @@ export default ({ env }) => ({
     config: {
       provider: 'nodemailer',
       providerOptions: {
-        host: 'smtp.gmail.com',
+        host: 'smtp.mail.me.com',
         port: 587,
+        secure: false, // STARTTLS
         auth: {
-          user: env('SMTP_USER'),
-          pass: env('SMTP_PASS'),
+          user: env('SMTP_USER'), // es. tuonome@icloud.com
+          pass: env('SMTP_PASS'), // App-specific password di iCloud
         },
       },
       settings: {

@@ -7,15 +7,16 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
+<header class="homepage-header">
   <a href="homepage.html" aria-label="Torna alla homepage"><img src="img/logo.jpg" alt="Logo Studio Albini" class="logo" /></a>
   <nav>
       <div class="close-btn" onclick="toggleMenu()">&#10005;</div> <!-- X per chiudere -->
+      <a href="homepage.html" onclick="toggleMenu()">Home</a>
       <a href="progetti2.html" onclick="toggleMenu()">Collaborazioni</a>
-		  <a href="personali.html" onclick="toggleMenu()">I miei progetti</a>
+		  <!--<a href="personali.html" onclick="toggleMenu()">I miei progetti</a>-->
       <a href="design.html" onclick="toggleMenu()">Design</a>
 		  <a href="carriera.html" onclick="toggleMenu()">Carriera</a>
-      <a href="chi-siamo.html" onclick="toggleMenu()">Contatti</a>
+      <a href="chi-siamo.html" onclick="toggleMenu()">Richiedi una consulenza</a>
     </nav>
   <div class="hamburger" onclick="toggleMenu()">
     <div></div>
@@ -32,10 +33,10 @@
   <div id="project-images" class="project-images-grid"></div>
 </section>
 
-<footer>
+<!--<footer>
   <p>&copy; 2025 Studio Albini - Tutti i diritti riservati</p>
 </footer>
-
+-->
 <script src="js/project.js"></script>
 <script src="js/main.js"></script> <!-- per menu hamburger -->
 </body>
