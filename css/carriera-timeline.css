@@ -113,7 +113,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 110px;
   width: 100%;
   box-sizing: border-box;
@@ -138,20 +138,35 @@
   box-sizing: content-box;
 }
 
-/* TESTO */
-.timeline-text {
-  width: 42%;
+/* I DUE LATI DEL PROGETTO (DESKTOP): 50% CIASCUNO */
+.timeline-item > .timeline-text,
+.timeline-item > .timeline-image {
+  flex: 0 0 50%;
+  width: 50%;
+  max-width: 50%;
   box-sizing: border-box;
 }
 
-.left-text {
+/* Elementi a sinistra della linea: distanziati con ampio respiro */
+.timeline-item.left > .timeline-text,
+.timeline-item.right > .timeline-image {
+  padding-right: 55px;
   text-align: right;
-  margin-right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-.right-text {
+/* Elementi a destra della linea: distanziati con ampio respiro */
+.timeline-item.left > .timeline-image,
+.timeline-item.right > .timeline-text {
+  padding-left: 55px;
   text-align: left;
-  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .timeline-text h3 {
@@ -176,20 +191,17 @@
 
 /* IMMAGINI DESKTOP */
 .timeline-image {
-  width: 225px;
-  height: 225px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-shrink: 0;
 }
 
 .timeline-image img {
-  width: 225px;
-  height: 225px;
+  width: 220px;
+  height: 220px;
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: block;
 }
 
 /* ===================================================
@@ -234,6 +246,22 @@
     left: 20px;
     top: 6px;
     transform: translate(-50%, 0);
+  }
+
+  /* Reset delle due metà 50% su mobile */
+  .timeline-item > .timeline-text,
+  .timeline-item > .timeline-image,
+  .timeline-item.left > .timeline-text,
+  .timeline-item.right > .timeline-image,
+  .timeline-item.left > .timeline-image,
+  .timeline-item.right > .timeline-text {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    align-items: flex-start !important;
+    text-align: left !important;
   }
 
   /* Su mobile il testo viene sempre prima dell'immagine */
