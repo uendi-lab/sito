@@ -1,11 +1,13 @@
+// STRAPI_URL è definita in main.js (caricato prima di questo script)
+
 async function loadCarriera() {
 
   const leftCol = document.getElementById("timeline-left");
   const rightCol = document.getElementById("timeline-right");
 
   const [personaliRes, collabRes] = await Promise.all([
-    fetch('http://localhost:1337/api/progetti-personalis?populate=*'),
-    fetch('http://localhost:1337/api/pietro-albinis?populate=*')
+    fetch(`${STRAPI_URL}/api/progetti-personalis?populate=*`),
+    fetch(`${STRAPI_URL}/api/pietro-albinis?populate=*`)
   ]);
 
   const personali = (await personaliRes.json()).data || [];
@@ -33,7 +35,7 @@ function createItem(proj, side, isPersonale){
   if (proj.Copertina?.url) {
     imgUrl = proj.Copertina.url.startsWith('http')
       ? proj.Copertina.url
-      : `http://localhost:1337${proj.Copertina.url}`;
+      : `${STRAPI_URL}${proj.Copertina.url}`;
   }
 
   let data = '';

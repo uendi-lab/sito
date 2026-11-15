@@ -15,7 +15,7 @@ export default {
           console.log('NUOVO CONTACT:', data);
           
           await strapi.plugins['email'].services.email.send({
-  to: 'uendi2000@gmail.com',
+  to: 'uendi01@icloud.com',
   subject: `Nuovo messaggio da ${data.nome}`,
   text:
 `Nuovo messaggio dal sito

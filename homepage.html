@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Studio di Architettura</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Studio Albini - Geometra Pietro Maria Albini</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -18,6 +18,7 @@
     </div>
 
     <nav>
+      <div class="close-btn" onclick="toggleMenu()">&#10005;</div>
       <a href="homepage.html" onclick="toggleMenu()">Home</a>
       <a href="progetti2.html" onclick="toggleMenu()">Collaborazioni</a>
 		  <!--<a href="personali.html" onclick="toggleMenu()">I miei progetti</a>-->
@@ -30,15 +31,81 @@
   </header>
 
   <!-- hero section with split layout -->
-  <div class="hero">
+  <section class="hero">
     <div class="hero-left">
       <div id="slideshow" class="slideshow-bg"></div>
     </div>
     <div class="hero-right">
-      <h1>Pietro Albini Geometra</h1>
-      <p>Design contemporaneo, materiali naturali, spazi che parlano.</p>
+      <span class="hero-eyebrow">Studio Tecnico</span>
+      <h1>STUDIO ALBINI</h1>
+      <h2 class="hero-subtitle">Geometra Pietro Maria Albini</h2>
+      <p class="hero-description">Lo Studio Albini offre servizi professionali di consulenza tecnica, progettazione e direzione lavori nel settore edilizio e immobiliare, garantendo competenza, affidabilità e attenzione alle esigenze del cliente in ogni fase dell’intervento.</p>
+      <div class="hero-actions">
+        <a href="#attivita" class="btn btn-primary">Attività svolte</a>
+        <a href="chi-siamo.html" class="btn btn-text">Richiedi una consulenza</a>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Attività Svolte Section -->
+  <section id="attivita" class="activities-section">
+    <div class="activities-header">
+      <h2 class="timeline-title">Attività svolte</h2>
+      <p class="activities-subtitle">Servizi professionali di consulenza tecnica, progettazione e gestione integrata degli interventi edilizi e immobiliari</p>
+    </div>
+
+    <div class="activities-grid">
+      <div class="activity-card">
+        <span class="activity-number">01</span>
+        <p>Consulenza tecnica specialistica in ambito edilizio, urbanistico e immobiliare.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">02</span>
+        <p>Progettazione architettonica preliminare, definitiva ed esecutiva per interventi di nuova costruzione, ristrutturazione e riqualificazione.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">03</span>
+        <p>Direzione lavori e coordinamento delle attività di cantiere, con controllo della qualità esecutiva e del rispetto dei tempi e dei costi.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">04</span>
+        <p>Interior Design e Space Planning per l’ottimizzazione funzionale ed estetica degli spazi interni.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">05</span>
+        <p>Rilievi metrici e restituzione grafica mediante strumenti tradizionali e digitali.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">06</span>
+        <p>Redazione e gestione di pratiche edilizie, urbanistiche e catastali.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">07</span>
+        <p>Elaborazione di computi metrici estimativi, contabilità lavori e valutazioni economiche degli interventi.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">08</span>
+        <p>Assistenza e gestione dei rapporti tra committenza, imprese esecutrici e professionisti coinvolti nel progetto.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">09</span>
+        <p>Verifica della conformità urbanistica, edilizia e catastale degli immobili.</p>
+      </div>
+
+      <div class="activity-card">
+        <span class="activity-number">10</span>
+        <p>Modellazione e rappresentazione grafica mediante software CAD e strumenti di visualizzazione 3D.</p>
+      </div>
+    </div>
+  </section>
 
   <script src="js/main.js"></script>
 </body>

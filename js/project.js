@@ -1,4 +1,10 @@
 // js/project.js
+
+// ── Configurazione API ──────────────────────────────────────────────────────
+// In locale: 'http://localhost:1337'
+// In produzione: 'https://strapi-pietro-albini.onrender.com'
+const STRAPI_URL = 'http://localhost:1337';
+
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
@@ -11,9 +17,9 @@ const tipo = getQueryParam('tipo');
 if (projectId) {
   console.log('Project ID:', projectId);
   // Scegli endpoint in base al tipo
-  let endpoint = `http://localhost:1337/api/pietro-albinis/${projectId}?populate=*`;
+  let endpoint = `${STRAPI_URL}/api/pietro-albinis/${projectId}?populate=*`;
   if (tipo === 'personale') {
-    endpoint = `http://localhost:1337/api/progetti-personalis/${projectId}?populate=*`;
+    endpoint = `${STRAPI_URL}/api/progetti-personalis/${projectId}?populate=*`;
   }
   fetch(endpoint)
     .then(res => res.json())
@@ -51,7 +57,7 @@ if (projectId) {
       if (attrs.Copertina?.url) {
         const coverUrl = attrs.Copertina.url.startsWith('http')
           ? attrs.Copertina.url
-          : `http://localhost:1337${attrs.Copertina.url}`;
+          : `${STRAPI_URL}${attrs.Copertina.url}`;
         const img = document.createElement('img');
         img.src = coverUrl;
         img.alt = 'Copertina progetto';
@@ -72,7 +78,7 @@ if (projectId) {
           let imgUrl = attr.formats?.small?.url || attr.url;
           if (!imgUrl) return;
           if (!imgUrl.startsWith('http')) {
-            imgUrl = `http://localhost:1337${imgUrl}`;
+            imgUrl = `${STRAPI_URL}${imgUrl}`;
           }
           console.log('Final img URL:', imgUrl);
 

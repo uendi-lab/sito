@@ -1,4 +1,11 @@
 // ===============================
+// CONFIGURAZIONE API
+// ===============================
+// In locale: 'http://localhost:1337'
+// In produzione: 'https://strapi-pietro-albini.onrender.com'
+const STRAPI_URL = 'http://localhost:1337';
+
+// ===============================
 // MENU HAMBURGER
 // ===============================
 
@@ -45,7 +52,7 @@ if (contactForm) {
     };
 
     try {
-      const response = await fetch('http://localhost:1337/api/contacts', {
+      const response = await fetch(`${STRAPI_URL}/api/contacts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -77,7 +84,7 @@ if (contactForm) {
   const slideshow = document.getElementById('slideshow');
   if (slideshow) {
     console.log('Slideshow container found');
-    const SLIDES_API_URL = 'http://localhost:1337/api/slides?populate=*';
+    const SLIDES_API_URL = `${STRAPI_URL}/api/slides?populate=*`;
     fetch(SLIDES_API_URL)
       .then(res => res.json())
       .then(json => {
@@ -100,7 +107,7 @@ if (contactForm) {
           console.log('imgData for slide', idx, imgData);
           if (imgData && imgData.url) {
             immaginiTrovate = true;
-            const imgUrl = imgData.url.startsWith('http') ? imgData.url : `http://localhost:1337${imgData.url}`;
+            const imgUrl = imgData.url.startsWith('http') ? imgData.url : `${STRAPI_URL}${imgData.url}`;
             const img = document.createElement('img');
             img.src = imgUrl;
             img.alt = `Slide ${idx+1}`;
@@ -162,12 +169,12 @@ if (contactForm) {
   const timeline = document.getElementById("timeline");
   if (timeline) {
     // Scegli l'endpoint in base alla pagina
-    let API_URL = 'http://localhost:1337/api/pietro-albinis?populate=*';
+    let API_URL = `${STRAPI_URL}/api/pietro-albinis?populate=*`;
     if (window.location.pathname.includes('personali.html')) {
-      API_URL = 'http://localhost:1337/api/progetti-personalis?populate=*';
+      API_URL = `${STRAPI_URL}/api/progetti-personalis?populate=*`;
     }
     if (window.location.pathname.includes('design.html')) {
-      API_URL = 'http://localhost:1337/api/progetti-personalis?populate=*';
+      API_URL = `${STRAPI_URL}/api/progetti-personalis?populate=*`;
     }
     fetch(API_URL)
       .then(res => res.json())
@@ -229,7 +236,7 @@ if (contactForm) {
               </div>
               <div class="timeline-center"></div>
               <div class="timeline-content">
-                ${imgUrl ? `<a href="${projectLink}"><img src="http://localhost:1337${imgUrl}" alt="Copertina progetto" class="timeline-image"></a>` : ''}
+                ${imgUrl ? `<a href="${projectLink}"><img src="${STRAPI_URL}${imgUrl}" alt="Copertina progetto" class="timeline-image"></a>` : ''}
               </div>
             `;
             timeline.appendChild(item);
@@ -273,9 +280,9 @@ if (contactForm) {
   const projectImageContainer = document.querySelector('.project-image');
   if (projectImageContainer) {
     // usa lo stesso endpoint dei progetti usato per la timeline
-    let API_URL_PROJECTS = 'http://localhost:1337/api/pietro-albinis?populate=*';
+    let API_URL_PROJECTS = `${STRAPI_URL}/api/pietro-albinis?populate=*`;
     if (window.location.pathname.includes('personali.html')) {
-      API_URL_PROJECTS = 'http://localhost:1337/api/progetti-personalis?populate=*';
+      API_URL_PROJECTS = `${STRAPI_URL}/api/progetti-personalis?populate=*`;
     }
 
     fetch(API_URL_PROJECTS)
@@ -285,7 +292,7 @@ if (contactForm) {
         const images = [];
         projects.forEach(proj => {
           if (proj && proj.Copertina && proj.Copertina.url) {
-            const url = proj.Copertina.url.startsWith('http') ? proj.Copertina.url : `http://localhost:1337${proj.Copertina.url}`;
+            const url = proj.Copertina.url.startsWith('http') ? proj.Copertina.url : `${STRAPI_URL}${proj.Copertina.url}`;
             images.push(url);
           }
         });
