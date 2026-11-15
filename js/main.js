@@ -215,7 +215,9 @@ if (contactForm) {
             // Copertina: mostra solo se url presente
             let imgUrl = '';
             if (proj.Copertina && proj.Copertina.url) {
-              imgUrl = proj.Copertina.url;
+              imgUrl = proj.Copertina.url.startsWith('http')
+                ? proj.Copertina.url
+                : `${STRAPI_URL}${proj.Copertina.url}`;
             }
             // ID progetto per link (dinamico da Strapi)
             const projectId = proj.documentId; // usa documentId, non id
@@ -235,7 +237,7 @@ if (contactForm) {
               </div>
               <div class="timeline-center"></div>
               <div class="timeline-content">
-                ${imgUrl ? `<a href="${projectLink}"><img src="${STRAPI_URL}${imgUrl}" alt="Copertina progetto" class="timeline-image"></a>` : ''}
+                ${imgUrl ? `<a href="${projectLink}"><img src="${imgUrl}" alt="Copertina progetto" class="timeline-image"></a>` : ''}
               </div>
             `;
             timeline.appendChild(item);
