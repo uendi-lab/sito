@@ -1170,21 +1170,27 @@ table {
     color: black;
   }
 
+  .timeline-container {
+    padding-left: 24px !important;
+    padding-right: 16px !important;
+  }
+
   .timeline-container::before {
-    left: 20px;
-    transform: translate(-20px);
+    left: 24px;
+    transform: translateX(-50%);
   }
 
   .timeline-item {
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 40px;
+    padding-left: 36px;
   }
 
   .timeline-item::before {
-    left: 5px;
-    top: 0;
-    transform: translate(-11px, 0);
+    left: 0;
+    top: 6px;
+    transform: translateX(-50%);
+    border: 2px solid #fff;
   }
 
   .timeline-left,
@@ -1195,6 +1201,8 @@ table {
   }
 
   .timeline-left {
+    background: transparent !important;
+    max-width: 100% !important;
     margin-bottom: 0.5rem;
   }
 
